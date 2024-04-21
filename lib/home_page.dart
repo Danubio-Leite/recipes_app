@@ -1,62 +1,128 @@
 import 'package:flutter/material.dart';
+import 'package:recipes_app/components/video_card.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _paginaAtual = 0;
-  final List<Widget> _paginas = [
-    const Text('Página 1'),
-    const Text('Página 2'),
-    const Text('Página 3'),
-    const Text('Página 4'),
-    const Text('Página 5'),
-  ];
-
-  void _mudarPagina(int index) {
-    setState(() {
-      _paginaAtual = index;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(child: _paginas[_paginaAtual]),
-        bottomNavigationBar: BottomNavigationBar(
-          fixedColor: Colors.deepPurple,
-          unselectedItemColor: Colors.red,
-          currentIndex: _paginaAtual,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Novidades',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_1.png',
+                        text: 'Espaguete com Ameijoas',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_2.png',
+                        text: 'Cozido à Portuguesa',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_3.png',
+                        text: 'Dessalgando Bacalhau',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_4.png',
+                        text: 'Os Rumos do Canal',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Receitas',
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Receitas Populares',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_12.png',
+                        text: 'Hamburguer de Frango à Tunga',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_5.png',
+                        text: 'Cozido à Portuguesa no Pão',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_6.png',
+                        text: 'Polvo à Lagareiro',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_7.png',
+                        text: 'Arroz Doce Cremoso',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Meal of the day',
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              top: 16.0,
+              bottom: 16.0,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: 'Loja',
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Cozinha Portuguesa',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_8.png',
+                        text: 'Bacalhau à Brás',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_9.png',
+                        text: 'Francesinha',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_10.png',
+                        text: 'Bife com Molho de Natas de Cogumelos',
+                      ),
+                      VideoCard(
+                        image: 'assets/images/thumbnails/food_11.png',
+                        text: 'Alheira à Tuga',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.book),
-              label: 'Minhas Receitas',
-            ),
-          ],
-          onTap: _mudarPagina,
-        ),
+          ),
+        ],
       ),
     );
   }
