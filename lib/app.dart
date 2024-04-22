@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_page.dart';
+import 'pages/home_page.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -11,7 +11,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int _paginaAtual = 0;
+  int _paginaAtual = 2;
 
   void _mudarPagina(int index) {
     setState(() {
@@ -30,7 +30,7 @@ class _AppState extends State<App> {
     ];
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(90),
+          preferredSize: const Size.fromHeight(120),
           child: ClipRRect(
             child: Image.asset(
               'assets/images/header.png',
