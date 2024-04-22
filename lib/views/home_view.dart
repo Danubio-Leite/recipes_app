@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipes_app/components/video_card.dart';
+import 'package:recipes_app/widgets/video_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipes_app/pages/recipe_page.dart';
+import 'package:recipes_app/views/recipe_view.dart';
 
 class VideoCard extends StatelessWidget {
   String image;

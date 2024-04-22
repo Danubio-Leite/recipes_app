@@ -16,6 +16,9 @@ dependencies:
   google_fonts: ^6.2.1
   auto_size_text: 
   json_annotation:
+  cloud_firestore:
+  firebase_core:
+  
 
 
 dev_dependencies:
