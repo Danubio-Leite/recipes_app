@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'views/home_view.dart';
+import 'views/voice_test_view.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -11,7 +12,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int _paginaAtual = 2;
+  int _paginaAtual = 1;
 
   void _mudarPagina(int index) {
     setState(() {
@@ -23,7 +24,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     final List<Widget> _paginas = [
       const Text('Receitas'),
-      const Text('Receitas Favoritas'),
+      const VoiceTestView(),
       const HomePage(),
       const Text('Loja Virtual'),
       const Text('Menu'),
@@ -77,8 +78,8 @@ class _AppState extends State<App> {
               label: 'Receitas',
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.book),
-              label: 'Favoritas',
+              icon: Icon(Icons.speaker_notes_outlined),
+              label: 'Comandos de Voz',
             ),
             const BottomNavigationBarItem(
               icon: Icon(null), // Removido o ícone do logo daqui

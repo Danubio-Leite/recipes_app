@@ -32,10 +32,43 @@ class RecipePage extends StatelessWidget {
                     ),
                   ),
                   Positioned(
+                    top: 30,
+                    left: 10,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(131, 0, 0, 0),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 30,
+                    right: 10,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(131, 0, 0, 0),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.favorite_border,
+                            color: Colors.white),
+                        onPressed: () {
+                          // Adicionar aos favoritos
+                        },
+                      ),
+                    ),
+                  ),
+                  Positioned(
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      width: 393,
+                      width: 425,
                       height: 90,
                       padding: const EdgeInsets.all(4),
                       decoration: const BoxDecoration(
