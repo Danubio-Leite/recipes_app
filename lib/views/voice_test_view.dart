@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'dart:math';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
@@ -131,18 +133,40 @@ class _VoiceTestViewState extends State<VoiceTestView> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: _circleColor,
-                shape: BoxShape.circle,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2),
+                    color: _circleColor,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text('Última palavra: ${_lastWords.join(', ')}'),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Cores disponíveis:',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                      'Vermelho, Azul, Amarelo, Verde, Roxo, Laranja, Rosa, Preto, Branco, Cinza, Marrom, Ciano, Transparente, Aleatório'),
+                ],
               ),
             ),
-            const SizedBox(height: 20),
-            Text('Última palavra: ${_lastWords.join(', ')}'),
           ],
         ),
       ),
