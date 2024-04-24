@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class VoiceTestView extends StatefulWidget {
   const VoiceTestView({Key? key}) : super(key: key);
@@ -19,16 +20,29 @@ class _VoiceTestViewState extends State<VoiceTestView> {
   Color _circleColor = Colors.green;
   List<String> _lastWords = [];
   String _currentWords = '';
+  YoutubePlayerController _controller = YoutubePlayerController(
+    params: const YoutubePlayerParams(
+      showControls: true,
+      showFullscreenButton: true,
+    ),
+  );
 
   @override
   void initState() {
     super.initState();
+    _controller = YoutubePlayerController(
+      params: const YoutubePlayerParams(
+        showControls: true,
+        showFullscreenButton: true,
+      ),
+    );
     _initSpeech();
   }
 
   @override
   void dispose() {
     super.dispose();
+    _controller.close();
     _stopListening();
   }
 
@@ -114,7 +128,7 @@ class _VoiceTestViewState extends State<VoiceTestView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Voice Test'),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: Icon(
               _isListening ? Icons.mic : Icons.mic_off,
@@ -140,14 +154,19 @@ class _VoiceTestViewState extends State<VoiceTestView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 20,
+                  height: 20,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 2),
                     color: _circleColor,
                     shape: BoxShape.circle,
                   ),
                 ),
+                const SizedBox(height: 20),
+//               YoutubePlayerIFrame(
+//   controller: _controller,
+//   aspectRatio: 16 / 9,
+// ),
                 const SizedBox(height: 20),
                 Text('Última palavra: ${_lastWords.join(', ')}'),
               ],
