@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VoiceTestView extends StatefulWidget {
   const VoiceTestView({Key? key}) : super(key: key);
@@ -21,9 +21,10 @@ class _VoiceTestViewState extends State<VoiceTestView> {
   List<String> _lastWords = [];
   String _currentWords = '';
   YoutubePlayerController _controller = YoutubePlayerController(
-    params: const YoutubePlayerParams(
-      showControls: true,
-      showFullscreenButton: true,
+    initialVideoId: 'fXNyWntqsD4', // ID do vídeo
+    flags: const YoutubePlayerFlags(
+      autoPlay: true,
+      mute: false,
     ),
   );
 
@@ -31,18 +32,20 @@ class _VoiceTestViewState extends State<VoiceTestView> {
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      params: const YoutubePlayerParams(
-        showControls: true,
-        showFullscreenButton: true,
+      initialVideoId: 'fXNyWntqsD4',
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
       ),
     );
+
     _initSpeech();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.close();
+    _controller.dispose();
     _stopListening();
   }
 
@@ -100,6 +103,23 @@ class _VoiceTestViewState extends State<VoiceTestView> {
         else if (_currentWords == 'aleatório' || _currentWords == 'Aleatório')
           _circleColor =
               Colors.primaries[Random().nextInt(Colors.primaries.length)];
+        else if (_currentWords == 'avançar' || _currentWords == 'Avançar') {
+          int newPosition = _controller.value.position.inSeconds + 10;
+          _controller.seekTo(Duration(seconds: newPosition));
+        } else if (_currentWords == 'recuar' || _currentWords == 'Recuar') {
+          int newPosition = _controller.value.position.inSeconds - 10;
+          _controller.seekTo(Duration(seconds: newPosition));
+        } else if (_currentWords == 'pausar' || _currentWords == 'Pausar') {
+          _controller.pause();
+        } else if (_currentWords == 'continuar' ||
+            _currentWords == 'Continuar' ||
+            _currentWords == 'play' ||
+            _currentWords == 'Play' ||
+            _currentWords == 'tocar' ||
+            _currentWords == 'Tocar') {
+          _controller.play();
+          _stopListening();
+        }
         _lastWords.add(_currentWords);
         _currentWords = '';
         if (_lastWords.length > 1) {
@@ -163,10 +183,24 @@ class _VoiceTestViewState extends State<VoiceTestView> {
                   ),
                 ),
                 const SizedBox(height: 20),
-//               YoutubePlayerIFrame(
-//   controller: _controller,
-//   aspectRatio: 16 / 9,
-// ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: YoutubePlayer(
+                      controller: _controller,
+                      showVideoProgressIndicator: true,
+                      progressIndicatorColor: Colors.amber,
+                      progressColors: const ProgressBarColors(
+                        playedColor: Colors.amber,
+                        handleColor: Colors.amberAccent,
+                      ),
+                      onReady: () {
+                        print('Player is ready.');
+                      },
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 20),
                 Text('Última palavra: ${_lastWords.join(', ')}'),
               ],
